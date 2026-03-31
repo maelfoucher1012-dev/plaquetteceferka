@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Calculateur Rachat Métaux</title>
+ <link rel="stylesheet" href="../css/style.css">
+ <style>
+ .calc-wrap {
+ padding: 72px 64px;
+ min-height: calc(100vh - 64px);
+ max-width: 1000px;
+ margin: 0 auto;
+ }
+ .calc-header { margin-bottom: 40px; }
+ .calc-header h1 {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: clamp(48px, 6vw, 80px);
+ line-height: .9; color: var(--text); margin-bottom: 12px;
+ }
+ .calc-header h1 span { color: var(--vert); }
+ .calc-header p { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.7; max-width: 520px; }
+
+ .prix-update {
+ display: inline-flex; align-items: center; gap: 8px;
+ padding: 8px 16px; border: 1px solid var(--border);
+ font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+ color: var(--text-muted); margin-bottom: 36px;
+ }
+ .prix-update span { color: var(--vert); font-weight: 700; }
+
+ .search-zone { position: relative; margin-bottom: 28px; }
+ .search-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--vert); margin-bottom: 10px; display: block; }
+ .search-input {
+ width: 100%; background: var(--bg2);
+ border: 1px solid var(--border2); border-bottom: 2px solid var(--vert);
+ padding: 16px 20px; font-size: 15px; color: var(--text);
+ font-family: 'DM Sans', sans-serif; outline: none; transition: background .2s;
+ }
+ .search-input:focus { background: var(--bg3); }
+ .search-input::placeholder { color: var(--text-muted); }
+
+ .suggestions {
+ position: absolute; top: 100%; left: 0; right: 0;
+ background: var(--bg2); border: 1px solid var(--border2); border-top: none;
+ z-index: 200; max-height: 320px; overflow-y: auto; display: none;
+ box-shadow: 0 8px 32px rgba(0,0,0,.25);
+ }
+ .suggestions.open { display: block; }
+ .sug-item {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 12px 20px; cursor: pointer;
+ border-bottom: 1px solid var(--border); transition: background .15s;
+ }
+ .sug-item:last-child { border-bottom: none; }
+ .sug-item:hover, .sug-item.sel { background: var(--vert-dim); }
+ .sug-left { display: flex; flex-direction: column; gap: 2px; }
+ .sug-nom { font-size: 14px; color: var(--text); font-weight: 500; }
+ .sug-nom mark { background: none; color: var(--vert); font-weight: 700; }
+ .sug-desc { font-size: 11px; color: var(--text-muted); font-weight: 300; }
+ .sug-prix { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--vert); margin-left: 16px; flex-shrink: 0; }
+
+ .est-header {
+ display: grid; grid-template-columns: 1fr 120px 150px 120px 44px;
+ gap: 2px; margin-bottom: 2px;
+ }
+ .est-col { font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+ color: var(--text-muted); padding: 8px 16px; background: var(--bg2);
+ border: 1px solid var(--border); text-align: center; }
+ .est-col:first-child { text-align: left; }
+
+ .calc-lines { display: flex; flex-direction: column; gap: 2px; margin-bottom: 2px; }
+ .calc-line {
+ display: grid; grid-template-columns: 1fr 120px 150px 120px 44px;
+ gap: 2px; animation: lineIn .2s ease forwards;
+ }
+ @keyframes lineIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+ .line-nom {
+ background: var(--bg2); border: 1px solid var(--border);
+ padding: 14px 16px; font-size: 14px; color: var(--text); font-weight: 500;
+ }
+ .line-nom small { display: block; font-size: 11px; color: var(--text-muted); font-weight: 300; margin-top: 2px; }
+ .line-prix {
+ background: var(--bg3); border: 1px solid var(--border);
+ padding: 14px 12px; font-size: 12px; color: var(--text-muted);
+ text-align: center; display: flex; align-items: center; justify-content: center;
+ }
+ .line-poids {
+ background: var(--bg2); border: 1px solid var(--vert-dark);
+ padding: 14px 16px; font-size: 14px; color: var(--text);
+ font-family: 'DM Sans', sans-serif; outline: none; text-align: center;
+ -moz-appearance: textfield; transition: border-color .2s;
+ }
+ .line-poids::-webkit-outer-spin-button,
+ .line-poids::-webkit-inner-spin-button { -webkit-appearance: none; }
+ .line-poids:focus { border-color: var(--vert); background: var(--bg3); }
+ .line-montant {
+ background: var(--bg3); border: 1px solid var(--border);
+ padding: 14px 12px; font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+ color: var(--vert); text-align: center;
+ display: flex; align-items: center; justify-content: center;
+ }
+ .line-del {
+ background: var(--bg3); border: 1px solid var(--border);
+ display: flex; align-items: center; justify-content: center;
+ cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all .2s;
+ }
+ .line-del:hover { background: rgba(200,50,50,.15); color: #e05; border-color: #e05; }
+
+ .calc-total {
+ background: var(--bg2); border: 1px solid var(--border2);
+ border-top: 2px solid var(--vert);
+ padding: 24px 32px; display: flex; align-items: center;
+ justify-content: space-between; margin-top: 4px; margin-bottom: 28px;
+ }
+ .total-label { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+ .total-sub { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+ .total-montant { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: var(--text-muted); line-height: 1; letter-spacing: 2px; transition: color .2s; }
+
+ .empty-state { text-align: center; padding: 40px 32px; border: 1px dashed var(--border2); margin-bottom: 4px; }
+ .empty-state p { font-size: 14px; color: var(--text-muted); font-weight: 300; }
+
+ .calc-cta {
+ display: flex; align-items: center; justify-content: space-between;
+ padding: 24px 28px; background: var(--bg2); border: 1px solid var(--border);
+ gap: 24px; margin-bottom: 56px;
+ }
+ .calc-cta p { font-size: 13px; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+ .calc-cta strong { display: block; font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+
+ .prix-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+ .prix-card { background: var(--bg2); border: 1px solid var(--border); padding: 18px 16px; cursor: pointer; transition: all .2s; }
+ .prix-card:hover { background: var(--vert-dim); border-color: var(--vert-dark); }
+ .prix-card-nom { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+ .prix-card-val { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--vert); line-height: 1; }
+ .prix-card-unit { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+ .prix-card-desc { font-size: 10px; color: var(--text-muted); margin-top: 8px; font-style: italic; line-height: 1.4; }
+ .prix-card-hint { font-size: 10px; color: var(--vert); margin-top: 6px; opacity: 0; transition: opacity .2s; }
+ .prix-card:hover .prix-card-hint { opacity: 1; }
+ </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fers &amp; Métaux</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;">
+<div class="calc-wrap">
+
+ <div class="calc-header">
+ <div class="section-tag">Ceferka — Outil de calcul</div>
+ <h1>CALCULATEUR<br><span>RACHAT MÉTAUX</span></h1>
+ <p>Estimez le montant de votre cheque en quelques secondes. Selectionnez votre metal, entrez le poids, et obtenez votre estimation immediat.</p>
+ </div>
+
+ <div class="prix-update">
+ Prix mis a jour le <span id="dateMAJ"></span> &nbsp;·&nbsp; Cours indicatifs — confirmation sur site
+ </div>
+
+ <label class="search-label">Rechercher un metal</label>
+ <div class="search-zone">
+ <input type="text" class="search-input" id="searchInput"
+ placeholder="Ex : cuivre, aluminium, ferraille..." autocomplete="off">
+ <div class="suggestions" id="suggestions"></div>
+ </div>
+
+ <div class="est-header" id="estHeader" style="display:none;">
+ <div class="est-col">Metal</div>
+ <div class="est-col">Prix unitaire</div>
+ <div class="est-col">Poids (kg)</div>
+ <div class="est-col">Montant</div>
+ <div class="est-col"></div>
+ </div>
+
+ <div class="calc-lines" id="calcLines"></div>
+ <div class="empty-state" id="emptyState">
+ <p>Tapez le nom d un metal ci-dessus ou cliquez sur une carte en bas pour commencer</p>
+ </div>
+
+ <div class="calc-total">
+ <div>
+ <div class="total-label">Estimation de votre cheque</div>
+ <div class="total-sub">Prix indicatifs — pesage definitif sur site</div>
+ </div>
+ <div class="total-montant" id="totalMontant">0,00 €</div>
+ </div>
+
+ <div class="calc-cta">
+ <div>
+ <strong>Pret a vendre vos metaux ?</strong>
+ <p>Rendez-vous au 9 avenue Gustave Eiffel, Andernos-les-Bains avec votre piece d identite. Pesage precis sur place et paiement immediat.</p>
+ </div>
+ <div style="display:flex;gap:12px;flex-shrink:0;">
+ <a class="btn-primary" href="contact.html?service=fer">Prendre contact</a>
+ <a class="btn-outline" href="tel:0556608471">05 56 60 84 71</a>
+ </div>
+ </div>
+
+ <div class="section-tag" style="margin-bottom:16px;">Tous les cours du moment — cliquer pour ajouter</div>
+ <div class="prix-grid" id="prixGrid"></div>
+
+</div>
+</div>
+
+<script>
+(function(){
+
+ /* ── CURSOR ── */
+  (function(){
+    var dot  = document.getElementById('cursor');
+    var ring = document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,visible=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX; my=e.clientY;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+      if(!visible){ visible=true; dot.style.opacity='1'; ring.style.opacity='.5'; }
+    });
+    (function loop(){
+      rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(loop);
+    })();
+  })();
+
+ /* THEME */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html','chargement.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicephore Niepce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+ function applyTheme(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+ document.querySelectorAll('.nav-brand').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-brand')===theme);});
+ document.querySelectorAll('.nav-link').forEach(function(l){var p=l.getAttribute('data-page');if(!p)return;l.style.display=ALLOW[theme].indexOf(p)!==-1?'':'none';});
+ document.querySelectorAll('[data-adresse]').forEach(function(el){el.textContent=ADRESSES[theme];});
+ }
+ var saved=null;try{saved=localStorage.getItem('theme');}catch(e){}
+ applyTheme(saved||'recyclage');
+ var cbEl=document.getElementById('themeToggle');
+ if(cbEl) cbEl.addEventListener('change',function(){applyTheme(this.checked?'ceferka':'recyclage');});
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ // navigation gérée par onclick HTML
+ });
+
+ /* DATE */
+ var d=new Date();
+ var mois=['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+ document.getElementById('dateMAJ').textContent=d.getDate()+' '+mois[d.getMonth()]+' '+d.getFullYear();
+
+ /* 
+ 28 METAUX CEFERKA — prix officiels du site
+ Mettre a jour chaque semaine
+ */
+ var M = [
+ { id:'cumel', nom:'Cuivre mele', prix:8.4, u:'kg', desc:'Melange de cuivre' },
+ { id:'cudep', nom:'Cuivre depose (tube neuf)', prix:9.0, u:'kg', desc:'Cuivre pur sans impuretes' },
+ { id:'cueta', nom:'Cuivre etame', prix:7.2, u:'kg', desc:'Cuivre recouvert etain' },
+ { id:'cumil', nom:'Cuivre Milberry', prix:9.0, u:'kg', desc:'Cuivre issu de cables denuves' },
+ { id:'cucpt', nom:'Compteur eau', prix:2.5, u:'kg', desc:'Appareil laiton mesure eau' },
+ { id:'la1', nom:'Laiton', prix:4.4, u:'kg', desc:'Alliage de cuivre et de zinc' },
+ { id:'ladou', nom:'Douille', prix:4.4, u:'kg', desc:'Etui de cartouche' },
+ { id:'lar1', nom:'Radiateur 1/2 rouge', prix:4.2, u:'kg', desc:'Radiateur compose de cuivre' },
+ { id:'larca', nom:'Radiateur cuivre/alu', prix:3.8, u:'kg', desc:'Radiateur compose de cuivre et laiton' },
+ { id:'al1', nom:'Aluminium (alu)', prix:0.9, u:'kg', desc:'Alu leger' },
+ { id:'alj', nom:'Jante alu', prix:1.5, u:'kg', desc:'Roue en aluminium pour vehicules' },
+ { id:'alct', nom:'Carter', prix:0.9, u:'kg', desc:'Alu cassant, automobile' },
+ { id:'ags', nom:'AGS', prix:1.2, u:'kg', desc:'Profiles en aluminium' },
+ { id:'zinc', nom:'Zinc', prix:1.4, u:'kg', desc:'Metal souvent utilise pour les toitures' },
+ { id:'plomb', nom:'Plomb', prix:0.7, u:'kg', desc:'Lourd et malleable' },
+ { id:'inox', nom:'Inox', prix:0.4, u:'kg', desc:'Cuisine non aimantee' },
+ { id:'moteur', nom:'Moteur electrique', prix:0.5, u:'kg', desc:'Pompes piscines, moteurs electriques' },
+ { id:'cu42', nom:'Cables 42%', prix:2.7, u:'kg', desc:'Cables electriques avec conducteur en cuivre' },
+ { id:'cucde', nom:'Cable DEEE 20%', prix:1.3, u:'kg', desc:'Cable issu des dechets electroniques' },
+ { id:'alca', nom:'Cable alu', prix:0.5, u:'kg', desc:'Cable electrique avec conducteur alu' },
+ { id:'fefer', nom:'Ferraille', prix:130, u:'tonne', desc:'Dechets de fer, recyclables en industrie' },
+ { id:'fovf2', nom:'Fonte VF2', prix:170, u:'tonne', desc:'Fonte de qualite moyenne, metallurgie' },
+ { id:'feplt', nom:'Platin', prix:60, u:'tonne', desc:'Ferrailles legeres a broyer' },
+ { id:'bat', nom:'Batterie', prix:300, u:'tonne', desc:'Batteries automobiles' },
+ { id:'fefex', nom:'Ferreux', prix:270, u:'tonne', desc:'Metaux faible teneur feraille' },
+ { id:'fedi', nom:'DI / OA', prix:170, u:'tonne', desc:'Dechets industriels ou objets anciens' },
+ { id:'fovf1', nom:'Fonte VF1', prix:190, u:'tonne', desc:'Disque de freins, tambours' },
+ { id:'gemhf', nom:'GEMHF', prix:60, u:'tonne', desc:'Dechets gros electromenager hors froid' }
+ ];
+
+ /* Prix en euros par kg */
+ function prixKg(m){ return m.u==='tonne' ? m.prix/1000 : m.prix; }
+
+ /* Affichage prix */
+ function affichePrix(m){
+ return m.prix.toFixed(2).replace('.',',') + ' \u20ac/' + m.u;
+ }
+
+ /* LIGNES */
+ var lignes=[];
+
+ /* RECHERCHE */
+ var inp=document.getElementById('searchInput');
+ var sug=document.getElementById('suggestions');
+ var selIdx=-1;
+
+ function hl(txt,q){
+ if(!q) return txt;
+ var re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+ return txt.replace(re,'<mark>$1</mark>');
+ }
+
+ function showSug(q){
+ q=q.trim().toLowerCase();
+ if(!q){sug.classList.remove('open');return;}
+ var res=M.filter(function(m){
+ return m.nom.toLowerCase().indexOf(q)!==-1 || m.desc.toLowerCase().indexOf(q)!==-1;
+ }).slice(0,9);
+ if(!res.length){sug.classList.remove('open');return;}
+ sug.innerHTML=res.map(function(m){
+ return '<div class="sug-item" data-id="'+m.id+'">'+
+ '<div class="sug-left">'+
+ '<span class="sug-nom">'+hl(m.nom,q)+'</span>'+
+ '<span class="sug-desc">'+m.desc+'</span>'+
+ '</div>'+
+ '<span class="sug-prix">'+affichePrix(m)+'</span>'+
+ '</div>';
+ }).join('');
+ sug.classList.add('open');
+ selIdx=-1;
+ sug.querySelectorAll('.sug-item').forEach(function(el){
+ el.addEventListener('mousedown',function(e){
+ e.preventDefault();
+ addLigne(el.getAttribute('data-id'));
+ inp.value='';
+ sug.classList.remove('open');
+ });
+ });
+ }
+
+ inp.addEventListener('input',function(){showSug(this.value);});
+ inp.addEventListener('keydown',function(e){
+ var items=sug.querySelectorAll('.sug-item');
+ if(!sug.classList.contains('open')) return;
+ if(e.key==='ArrowDown'){selIdx=Math.min(selIdx+1,items.length-1);items.forEach(function(el,i){el.classList.toggle('sel',i===selIdx);});e.preventDefault();}
+ else if(e.key==='ArrowUp'){selIdx=Math.max(selIdx-1,0);items.forEach(function(el,i){el.classList.toggle('sel',i===selIdx);});e.preventDefault();}
+ else if(e.key==='Enter'&&selIdx>=0){addLigne(items[selIdx].getAttribute('data-id'));inp.value='';sug.classList.remove('open');e.preventDefault();}
+ else if(e.key==='Escape'){sug.classList.remove('open');}
+ });
+ document.addEventListener('click',function(e){if(!e.target.closest('.search-zone'))sug.classList.remove('open');});
+
+ /* AJOUTER LIGNE */
+ function addLigne(id){
+ if(lignes.find(function(l){return l.id===id;})){
+ var ex=document.querySelector('.calc-line[data-id="'+id+'"] .line-poids');
+ if(ex){ex.focus();ex.select();}
+ return;
+ }
+ var m=M.find(function(x){return x.id===id;});
+ if(!m) return;
+ lignes.push({id:id,metal:m,poids:0});
+ render();
+ }
+
+ /* RENDU */
+ function render(){
+ var container=document.getElementById('calcLines');
+ var empty=document.getElementById('emptyState');
+ var header=document.getElementById('estHeader');
+ if(!lignes.length){
+ container.innerHTML='';empty.style.display='block';header.style.display='none';
+ updateTotal();return;
+ }
+ empty.style.display='none';header.style.display='';
+ container.innerHTML=lignes.map(function(l){
+ var mont=l.poids>0?(l.poids*prixKg(l.metal)).toFixed(2).replace('.',',')+' \u20ac':'—';
+ return '<div class="calc-line" data-id="'+l.id+'">'+
+ '<div class="line-nom">'+l.metal.nom+'<small>'+l.metal.desc+'</small></div>'+
+ '<div class="line-prix">'+affichePrix(l.metal)+'</div>'+
+ '<input class="line-poids" type="number" min="0" step="0.1" value="'+(l.poids||'')+'" placeholder="kg">'+
+ '<div class="line-montant">'+mont+'</div>'+
+ '<div class="line-del" title="Supprimer">\u2715</div>'+
+ '</div>';
+ }).join('');
+ container.querySelectorAll('.line-poids').forEach(function(input){
+ var id=input.closest('.calc-line').getAttribute('data-id');
+ input.addEventListener('input',function(){
+ var l=lignes.find(function(x){return x.id===id;});
+ if(l){
+ l.poids=parseFloat(this.value)||0;
+ var mel=input.closest('.calc-line').querySelector('.line-montant');
+ mel.textContent=l.poids>0?(l.poids*prixKg(l.metal)).toFixed(2).replace('.',',')+' \u20ac':'—';
+ updateTotal();
+ }
+ });
+ });
+ container.querySelectorAll('.line-del').forEach(function(btn){
+ var id=btn.closest('.calc-line').getAttribute('data-id');
+ btn.addEventListener('click',function(){lignes=lignes.filter(function(l){return l.id!==id;});render();});
+ });
+ updateTotal();
+ }
+
+ /* TOTAL */
+ function updateTotal(){
+ var total=lignes.reduce(function(sum,l){return sum+(l.poids*prixKg(l.metal));},0);
+ var el=document.getElementById('totalMontant');
+ el.textContent=total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' \u20ac';
+ el.style.color=total>0?'var(--vert)':'var(--text-muted)';
+ }
+
+ /* GRILLE DES PRIX */
+ document.getElementById('prixGrid').innerHTML=M.map(function(m){
+ return '<div class="prix-card" data-id="'+m.id+'">'+
+ '<div class="prix-card-nom">'+m.nom+'</div>'+
+ '<div class="prix-card-val">'+m.prix.toFixed(2).replace('.',',')+'</div>'+
+ '<div class="prix-card-unit">\u20ac par '+m.u+'</div>'+
+ '<div class="prix-card-desc">'+m.desc+'</div>'+
+ '<div class="prix-card-hint">+ Ajouter</div>'+
+ '</div>';
+ }).join('');
+
+ document.getElementById('prixGrid').querySelectorAll('.prix-card').forEach(function(card){
+ card.addEventListener('click',function(){
+ addLigne(card.getAttribute('data-id'));
+ window.scrollTo({top:0,behavior:'smooth'});
+ });
+ });
+
+ render();
+
+})();
+</script>
+</body>
+</html>

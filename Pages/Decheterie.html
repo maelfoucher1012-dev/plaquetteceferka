@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Déchèterie Pro</title>
+ <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fer &amp; Métaux</a>
+ <a class="nav-link active" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;display:flex;flex-direction:column;">
+ <div class="section-hero">
+ <div class="section-hero-left">
+ <div class="section-tag">Nos services — Déchèterie</div>
+ <h1 class="section-h1">DÉCHÈTERIE <span>PROFESSIONNELLE</span></h1>
+ <p class="section-desc">Valorisation maximale des déchets du bâtiment. Partenaire Valobat — traitement sans frais.</p>
+ </div>
+ <div class="section-hero-right"><img src="../images/decheterie-hero.jpg" alt="" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">IMG</span></div>
+ </div>
+ <div class="sub-nav">
+ <div class="sub-nav-btn active" onclick="showSubPanel('d-desc',this)">Notre déchèterie</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('d-tri',this)">Guide de tri</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('d-valobat',this)">Valobat</div>
+ </div>
+ <div class="sub-panels">
+ <div class="sub-panel active" id="d-desc">
+ <div class="desc-service-grid">
+ <div>
+ <div class="product-desc-box"><p class="product-desc-text">Spécialisée dans le recyclage de matériaux variés : papier, carton, plastique, bois, gravats.<br><br><strong style="color:var(--vert);"> Les déchets dangereux ne sont pas acceptés.</strong></p></div>
+ <div class="info-grid" style="margin-top:24px;">
+ <div class="info-card"><div class="info-label"> Adresse</div><div class="info-card-val" data-adresse>12 rue Nicéphore Niépce, Andernos-les-Bains</div></div>
+ <div class="info-card"><div class="info-label"> Horaires</div><div class="info-card-val">Lun – Jeu · 7h30–12h / 13h30–17h30<br>Vendredi · 7h30–12h / 14h–17h30</div></div>
+ <div class="info-card"><div class="info-label"> Contact</div><div class="info-card-val">05 56 60 84 71</div></div>
+ <div class="info-card"><div class="info-label"> Accès</div><div class="info-card-val">Professionnels &amp; particuliers</div></div>
+ </div>
+ </div>
+ <div class="desc-service-img"><img src="../images/decheterie-desc.jpg" alt="Notre déchèterie" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div>
+ </div>
+ </div>
+ <div class="sub-panel" id="d-tri">
+ <div class="section-title-block"><h2>Guide <span>de tri</span></h2><p>Matériaux acceptés et refusés par flux — déchets du bâtiment</p></div>
+ <div class="tri-grid">
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect x="8" y="6" width="24" height="28" rx="3" stroke="currentColor" stroke-width="2"/><path d="M14 12h12M14 18h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20 26a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor"/></svg></div>
+  <div class="tri-name">Plastique</div>
+  <div class="tri-accepted">Profilé, canalisation, gouttière, tube, lambris, bardage, PVC, portail...</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Mousse PU, isolant PSE/XPS, emballage</div>
+ </div>
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M6 14l14-8 14 8v16l-14 8L6 30V14z" stroke="currentColor" stroke-width="2"/><path d="M6 14l14 8 14-8M20 22v14" stroke="currentColor" stroke-width="2"/></svg></div>
+  <div class="tri-name">Papier / Carton</div>
+  <div class="tri-accepted">Carton sec d'emballage</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Carton humide</div>
+ </div>
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect x="5" y="20" width="30" height="14" rx="2" stroke="currentColor" stroke-width="2"/><rect x="10" y="12" width="20" height="10" rx="2" stroke="currentColor" stroke-width="2"/><rect x="15" y="6" width="10" height="8" rx="2" stroke="currentColor" stroke-width="2"/></svg></div>
+  <div class="tri-name">Inertes</div>
+  <div class="tri-accepted">Béton ferraillé, brique, tuile, céramique... Max 50 cm.</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Brique plâtrière, terre excavée</div>
+ </div>
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect x="6" y="6" width="28" height="28" rx="2" stroke="currentColor" stroke-width="2"/><line x1="20" y1="6" x2="20" y2="34" stroke="currentColor" stroke-width="2"/><line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="2"/><circle cx="20" cy="20" r="2" fill="currentColor"/></svg></div>
+  <div class="tri-name">Menuiseries Vitrées</div>
+  <div class="tri-accepted">Menuiseries intègres bois/alu/PVC, garde-corps...</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Verre cassé, joint amianté, peinture au plomb</div>
+ </div>
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><rect x="5" y="12" width="30" height="18" rx="2" stroke="currentColor" stroke-width="2"/><line x1="5" y1="21" x2="35" y2="21" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M12 12V9M20 12V7M28 12V9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="tri-name">Plâtre</div>
+  <div class="tri-accepted">Plaque et carreau de plâtre, dalle, cloison alvéolaire SANS isolant</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Sac de plâtre, colle, plaque ciment</div>
+ </div>
+
+ <div class="tri-card">
+  <div class="tri-icon" style="color:var(--vert);"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><path d="M8 32L20 8l12 24H8z" stroke="currentColor" stroke-width="2"/><path d="M14 24h12M17 18h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+  <div class="tri-name">Bois</div>
+  <div class="tri-accepted">Charpente, parquet, panneau... y compris peinture non dangereuse</div>
+  <div class="tri-refused-label">Refusé</div>
+  <div class="tri-refused">Bois dangereux, palette, bois de coffrage</div>
+ </div>
+
+ </div>
+ </div>
+ <div class="sub-panel" id="d-valobat">
+ <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;">
+ <div>
+ <div class="section-title-block"><h2>Partenaire <span>Valobat</span></h2><p>Traitement sans frais des déchets de construction</p></div>
+ <div class="product-desc-box"><p class="product-desc-text">Traitement <strong style="color:var(--vert);">sans frais</strong> et respectueux de l'environnement.<br><br>Reprise gratuite : bois, plâtres, PVC, menuiseries, matériaux inertes, laine de verre...<br><br>Conforme à la <strong style="color:var(--vert);">REP PMCB</strong>.</p></div>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:20px;">
+  <div style="padding:18px 20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+   <div class="info-label" style="margin-bottom:8px;">Déchets non inertes</div>
+   <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--vert);line-height:1;">2 Tonnes / jour</div>
+   <div style="font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.5;">Par chantier — sans frais<br><span style="color:#cc4444;">Surplus facturable au-delà</span></div>
+  </div>
+  <div style="padding:18px 20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+   <div class="info-label" style="margin-bottom:8px;">Déchets inertes</div>
+   <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--vert);line-height:1;">1,5 Tonne / jour</div>
+   <div style="font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.5;">Par chantier — sans frais<br><span style="color:#cc4444;">Surplus facturable au-delà</span></div>
+  </div>
+ </div>
+ <div class="tags-row" style="margin-top:20px;"><span class="tag">Bois</span><span class="tag">Plâtres</span><span class="tag">PVC</span><span class="tag">Menuiseries</span><span class="tag">Inertes</span><span class="tag">Laine de verre</span></div>
+ </div>
+ <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;">
+ <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);">NOUS SOMMES PARTENAIRE DE</div>
+ <img src="../images/logo-valobat.png" alt="Valobat" style="max-height:80px;max-width:220px;object-fit:contain;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+ <div style="display:none;font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--vert);letter-spacing:2px;">VALOBAT</div>
+ <div style="padding:12px 24px;background:var(--vert-dim);border:1px solid var(--vert-dark);font-size:12px;color:var(--vert);letter-spacing:2px;">Traitement sans frais · REP PMCB</div>
+ <a href="https://www.valobat.fr/" target="_blank" rel="noopener" style="display:inline-block;padding:12px 28px;border:1.5px solid var(--vert);color:var(--vert);font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .3s;" onmouseover="this.style.background='var(--vert-dim)'" onmouseout="this.style.background='transparent'">Visiter valobat.fr →</a>
+ </div>
+ </div>
+ </div>
+ </div>
+</div>
+
+
+<script>
+(function(){
+ /* CURSOR */
+  (function(){
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,vis=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=mx+'px';dot.style.top=my+'px';
+      if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='.5';}
+    });
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  })();
+
+ /* CONFIG */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+
+ /* APPLIQUER THÈME */
+ function apply(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+
+ /* checkbox */
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+
+ /* logos actifs */
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.classList.toggle('active', b.getAttribute('data-brand')===theme);
+ });
+
+ /* MASQUER / MONTRER liens header */
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ var p=l.getAttribute('data-page');
+ if(!p) return;
+ l.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* tiles accueil */
+ document.querySelectorAll('.service-tile').forEach(function(t){
+ var p=t.getAttribute('data-page');
+ if(!p) return;
+ t.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* adresses */
+ document.querySelectorAll('[data-adresse]').forEach(function(el){
+ el.textContent=ADRESSES[theme];
+ });
+
+ /* redirection si page interdite */
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ if(cur==='') cur='index.html';
+ if(ALLOW[theme].indexOf(cur)===-1){
+ var inPages=window.location.pathname.indexOf('/pages/')!==-1;
+ window.location.replace(inPages?'../index.html':'index.html');
+ }
+ }
+
+ /* INIT — défaut recyclage */
+ var saved=null; try{saved=localStorage.getItem('theme');}catch(e){}
+ apply(saved||'recyclage');
+
+ /* CHECKBOX */
+ var cb2=document.getElementById('themeToggle');
+ if(cb2) cb2.addEventListener('change',function(){apply(this.checked?'ceferka':'recyclage');});
+
+ /* LOGOS CLIQUABLES */
+ // logos gèrent le thème via onclick + navigation native
+
+ /* LIEN ACTIF */
+ var cur2=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ l.classList.toggle('active', l.getAttribute('data-page')===cur2);
+ });
+})();
+
+function showSubPanel(id,btn){
+ document.querySelectorAll('.sub-panel').forEach(function(p){p.classList.remove('active');});
+ document.querySelectorAll('.sub-nav-btn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById(id).classList.add('active');
+ if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

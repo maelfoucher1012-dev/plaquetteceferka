@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Chargement Immédiat</title>
+ <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="#">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="#">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fers &amp; Métaux</a>
+ <a class="nav-link" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link active" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="display:flex;flex-direction:column;">
+
+ <!-- HERO -->
+ <div class="section-hero">
+ <div class="section-hero-left">
+ <div class="section-tag">Nos services — Chargement</div>
+ <h1 class="section-h1">CHARGEMENT <span>IMMÉDIAT</span></h1>
+ <p class="section-desc">Évacuation rapide et efficace de vos déchets grâce à deux équipements complémentaires. Intervention sur tous types de chantiers, zones difficiles d'accès incluses.</p>
+ </div>
+ <div class="section-hero-right"><img src="../images/chargement-hero.jpg" alt="Chargement" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">CHARGEMENT</span></div>
+ </div>
+
+ <!-- SUB NAV — 3 onglets -->
+ <div class="sub-nav">
+ <div class="sub-nav-btn active" onclick="showSubPanel('c-service',this)">Le service</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('c-benne', this)">Notre équipement n°1</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('c-camion', this)">Notre équipement n°2</div>
+ </div>
+
+ <div class="sub-panels">
+
+ <!-- PRÉSENTATION DU SERVICE -->
+ <div class="sub-panel active" id="c-service">
+
+ <div class="section-title-block">
+ <h2>Le service <span>chargement</span></h2>
+ <p>Une prestation clé en main pour l'évacuation de tous vos déchets, quelles que soient les contraintes de votre chantier</p>
+ </div>
+
+ <div class="desc-service-grid">
+ <div>
+ <div class="product-desc-box">
+ <p class="product-desc-text">
+ Notre service de chargement immédiat vous permet d'évacuer rapidement et efficacement tous vos déchets grâce à deux équipements spécialisés, complémentaires selon la nature de votre chantier.<br><br>
+ Que vous ayez besoin d'un chargement ponctuel ou régulier, nous intervenons rapidement avec le matériel adapté. Nos équipes prennent en charge tous les volumes, des petites quantités aux gros chantiers de démolition.<br><br>
+ Nous assurons également le <strong style="color:var(--vert);">rachat de vos fers et métaux</strong> lors de nos interventions, pour une valorisation maximale de vos déchets.
+ </p>
+ </div>
+
+ <!-- Points forts -->
+ <div class="info-grid" style="margin-top:28px;">
+ <div class="info-card">
+ <div class="info-label"> Réactivité</div>
+ <div class="info-card-val">Intervention rapide sur demande, délai réduit</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Accessibilité</div>
+ <div class="info-card-val">Zones difficiles, espaces restreints, hauteur</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Valorisation</div>
+ <div class="info-card-val">Tri et recyclage garantis, valorisation max</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Rachat</div>
+ <div class="info-card-val">Fers et métaux rachetés sur place</div>
+ </div>
+ </div>
+
+ <!-- CTA -->
+ <div class="cta-devis-block" style="margin-top:32px;">
+ <div class="cta-devis-text">
+ <strong>Besoin d'un chargement immédiat ?</strong>
+ Contactez-nous pour une intervention rapide sur votre chantier.
+ </div>
+ <a class="cta-devis-btn" href="chargement.html">Découvrir nos équipements</a>
+ </div>
+ </div>
+
+ <div class="desc-service-img">
+ <!-- <img src="../images/chargement-service.jpg" alt="Service chargement"> -->
+ </div>
+ </div>
+
+ <!-- Stats -->
+ <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:40px;">
+ <div style="background:var(--bg3);padding:28px;text-align:center;border:1px solid var(--border);">
+ <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--vert);line-height:1;">2</div>
+ <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:6px;">Équipements</div>
+ </div>
+ <div style="background:var(--bg3);padding:28px;text-align:center;border:1px solid var(--border);">
+ <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--vert);line-height:1;">24H</div>
+ <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:6px;">Délai d'intervention</div>
+ </div>
+ <div style="background:var(--bg3);padding:28px;text-align:center;border:1px solid var(--border);">
+ <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--vert);line-height:1;">∞</div>
+ <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:6px;">Types de déchets</div>
+ </div>
+ <div style="background:var(--bg3);padding:28px;text-align:center;border:1px solid var(--border);">
+ <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--vert);line-height:1;">100%</div>
+ <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:6px;">Valorisés</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- ÉQUIPEMENT 1 : BENNE AVEC GRUE SUR BERCE -->
+ <div class="sub-panel" id="c-benne">
+ <div class="product-detail">
+
+ <div class="product-img-zone">
+ <!-- <img src="../images/benne-grue.jpg" alt="Benne avec grue sur berce"> -->
+ <span class="hero-placeholder" style="font-size:60px;">BENNE</span>
+ </div>
+
+ <div>
+ <div class="section-tag">Nos équipements — Équipement n°1</div>
+ <div class="product-title">BENNE AVEC <span>GRUE SUR BERCE</span></div>
+
+ <div class="product-desc-box">
+ <p class="product-desc-text">
+ Notre première solution est une <strong style="color:var(--vert);">grue sur berce avec grappin directement montée sur la benne</strong>. Le châssis renforcé garantit une stabilité et une sécurité optimales lors du chargement de charges lourdes.<br><br>
+ Sa maniabilité permet d'accéder aux zones les plus difficiles, ce qui optimise l'évacuation de tous types de déchets.
+ </p>
+ </div>
+
+ <!-- Caractéristiques -->
+ <p class="info-label" style="margin:24px 0 14px;">Caractéristiques</p>
+ <div class="info-grid">
+ <div class="info-card">
+ <div class="info-label"> Grue</div>
+ <div class="info-card-val">Montée directement sur la benne</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Grappin</div>
+ <div class="info-card-val">Intégré — multimatériaux</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Châssis</div>
+ <div class="info-card-val">Renforcé — charges lourdes</div>
+ </div>
+ <div class="info-card">
+ <div class="info-label"> Accès</div>
+ <div class="info-card-val">Zones difficiles, espaces restreints</div>
+ </div>
+ </div>
+
+ <!-- Points forts -->
+ <p class="info-label" style="margin:24px 0 14px;">Utilisé pour</p>
+ <div class="tags-row">
+ <span class="tag">Ferrailles lourdes</span>
+ <span class="tag">Gravats</span>
+ <span class="tag">Déchets de chantier</span>
+ <span class="tag">Gros volumes</span>
+ <span class="tag">Zones encombrées</span>
+ </div>
+
+
+ </div>
+ </div>
+ </div>
+
+ <!-- ÉQUIPEMENT 2 : CAMION AVEC GRUE INTÉGRÉE -->
+ <div class="sub-panel" id="c-camion">
+ <div class="product-detail">
+
+ <div style="display:flex;flex-direction:column;gap:4px;">
+  <div class="product-img-zone">
+   <img src="../images/camion-grue.jpg" alt="Camion avec grue intégrée" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+   <span class="hero-placeholder" style="font-size:60px;display:none;">CAMION</span>
+  </div>
+  <div class="product-img-zone">
+   <img src="../images/camion-grue-2.jpg" alt="Camion vue 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+   <span class="hero-placeholder" style="font-size:60px;display:none;">CAMION 2</span>
+  </div>
+ </div>
+
+ <div>
+ <div class="section-tag">Nos équipements — Équipement n°2</div>
+ <div class="product-title">CAMION AVEC <span>GRUE INTÉGRÉE</span></div>
+
+ <div class="product-desc-box">
+ <p class="product-desc-text">
+ Ce véhicule embarque une <strong style="color:var(--vert);">technologie innovante : une grue avec un système de pesage intégré directement sur le camion</strong>, et non sur une benne séparée comme on le voit habituellement.<br><br>
+ Résultat : plus besoin d'attendre ou d'organiser des déplacements supplémentaires. La pesée se fait directement sur place, de manière précise et fiable, dès le chargement.<br><br>
+ Couplée à notre <strong style="color:var(--vert);">benne compartimentée</strong>, cette configuration permet de collecter plusieurs flux de déchets simultanément en un seul passage — un vrai gain de temps et d'efficacité pour vos chantiers.
+ </p>
+ </div>
+
+ <!-- Avantages clés mis en valeur -->
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:28px 0;">
+ <div style="padding:20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+ <div class="info-label" style="margin-bottom:6px;"> Pesage intégré sur le camion</div>
+ <p style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.6;">Système de pesage directement embarqué sur le véhicule. Pesée précise et fiable réalisée sur place, sans équipement supplémentaire.</p>
+ </div>
+ <div style="padding:20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+ <div class="info-label" style="margin-bottom:6px;"> Benne compartimentée</div>
+ <p style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.6;">Collecte de différents flux de déchets simultanément en un seul passage. Gain de temps, réduction des rotations.</p>
+ </div>
+ <div style="padding:20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+ <div class="info-label" style="margin-bottom:6px;"> Grue directement sur le camion</div>
+ <p style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.6;">Contrairement à la benne avec grue sur berce, la grue est intégrée au véhicule lui-même. Plus de flexibilité, déplacement immédiat après chargement.</p>
+ </div>
+ <div style="padding:20px;background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--vert);">
+ <div class="info-label" style="margin-bottom:6px;"> Intervention en un seul passage</div>
+ <p style="font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.6;">Chargement, pesage et transport réunis en une seule venue. Idéal pour les interventions ponctuelles ou les chantiers à forte contrainte de temps.</p>
+ </div>
+ </div>
+
+ <p class="info-label" style="margin-bottom:14px;">Idéal pour</p>
+ <div class="tags-row">
+ <span class="tag">Multi-flux simultanés</span>
+ <span class="tag">Pesage sur place</span>
+ <span class="tag">Métaux ferreux et non ferreux</span>
+ <span class="tag">Rachat sur place</span>
+ <span class="tag">Intervention unique</span>
+ <span class="tag">Chantiers urgents</span>
+ </div>
+
+
+ </div>
+ </div>
+ </div>
+
+ </div><!-- /sub-panels -->
+</div>
+
+<script>
+(function(){
+ var c=document.getElementById('cursor'),r=document.getElementById('cursorRing');
+ var mx=0,my=0,rx=0,ry=0;
+ document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px';});
+ (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html','chargement.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+ function applyTheme(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+ document.querySelectorAll('.nav-brand').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-brand')===theme);});
+ document.querySelectorAll('.nav-link').forEach(function(l){var p=l.getAttribute('data-page');if(!p)return;l.style.display=ALLOW[theme].indexOf(p)!==-1?'':'none';});
+ document.querySelectorAll('[data-adresse]').forEach(function(el){el.textContent=ADRESSES[theme];});
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ if(ALLOW[theme].indexOf(cur)===-1){window.location.replace('../index.html');}
+ }
+ var saved=null;try{saved=localStorage.getItem('theme');}catch(e){}
+ applyTheme(saved||'recyclage');
+ var cbEl=document.getElementById('themeToggle');
+ if(cbEl) cbEl.addEventListener('change',function(){applyTheme(this.checked?'ceferka':'recyclage');});
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.addEventListener('click',function(e){e.preventDefault();applyTheme(b.getAttribute('data-brand'));});
+ });
+ var cur2=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-page')===cur2);});
+})();
+
+function showSubPanel(id,btn){
+ document.querySelectorAll('.sub-panel').forEach(function(p){p.classList.remove('active');});
+ document.querySelectorAll('.sub-nav-btn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById(id).classList.add('active');
+ if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

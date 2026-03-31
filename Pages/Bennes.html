@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Nos Bennes</title>
+ <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link active" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fer &amp; Métaux</a>
+ <a class="nav-link" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;display:flex;flex-direction:column;">
+ <div class="section-hero">
+ <div class="section-hero-left">
+ <div class="section-tag">Nos produits — Bennes</div>
+ <h1 class="section-h1">NOS <span>BENNES</span></h1>
+ <p class="section-desc">De 2m³ à 30m³ pour les professionnels du BTP, industriels, artisans et particuliers.</p>
+ </div>
+ <div class="section-hero-right"><img src="../images/bennes-hero.jpg" alt="" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">IMG</span></div>
+ </div>
+ <div class="sub-nav">
+ <div class="sub-nav-btn active" onclick="showSubPanel('b-2m3',this)">2m³</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-6m3',this)">6m³</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-8etr',this)">8m³ Étroite</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-8bt',this)">8m³ Bateau</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-9m3',this)">9m³</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-15gr',this)">15m³</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-30m3',this)">30m³</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-svc',this)">Service</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('b-schema',this)">Tableau récapitulatif</div>
+ </div>
+ <div class="sub-panels">
+ <div class="sub-panel active" id="b-2m3"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-2m3.jpg" alt="Benne 2m³" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">2m³</span></div><div><div class="product-title">BENNE <span>2m³</span></div><div class="product-desc-box"><p class="product-desc-text">Parfaite pour les petites quantités et espaces réduits.</p></div><table class="dim-table"><thead><tr><th>2M³</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>315 cm</td><td>330 cm</td></tr><tr><td>Largeur</td><td>175 cm</td><td>200 cm</td></tr><tr><td>Hauteur</td><td>35 cm</td><td>55 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=2m3">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-6m3"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-6m3.jpg" alt="Benne 6m³" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">6m³</span></div><div><div class="product-title">BENNE <span>6m³</span></div><div class="product-desc-box"><p class="product-desc-text">Juste équilibre entre compacité et capacité.</p></div><table class="dim-table"><thead><tr><th>6M³</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>310 cm</td><td>330 cm</td></tr><tr><td>Largeur</td><td>165 cm</td><td>180 cm</td></tr><tr><td>Hauteur</td><td>115 cm</td><td>130 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=6m3">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-8etr"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-8m3-etr.jpg" alt="Benne 8m³ Étroite" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">8ETR</span></div><div><div class="product-title">BENNE <span>8m³ Étroite</span></div><div class="product-desc-box"><p class="product-desc-text">Conçue pour être levée à la grue. Indispensable sur les chantiers en hauteur.</p></div><p style="font-size:13px;color:var(--text-muted);margin-top:16px;">* Dimensions sur devis</p></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=8m3-grutable">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-8bt"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-8m3-bt.jpg" alt="Benne 8m³ Bateau" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">8BT</span></div><div><div class="product-title">BENNE <span>8m³ Bateau</span></div><div class="product-desc-box"><p class="product-desc-text">Forme bateau facilitant le chargement manuel.</p></div><table class="dim-table"><thead><tr><th>8M³ Bateau</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>540 cm</td><td>580 cm</td></tr><tr><td>Largeur</td><td>180 cm</td><td>210 cm</td></tr><tr><td>Hauteur</td><td>80 cm</td><td>110 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=8m3-bateau">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-9m3"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-9m3.jpg" alt="Benne 9m³" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">9m³</span></div><div><div class="product-title">BENNE <span>9m³</span></div><div class="product-desc-box"><p class="product-desc-text">Bon compromis pour réduire les rotations.</p></div><table class="dim-table"><thead><tr><th>9M³</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>310 cm</td><td>340 cm</td></tr><tr><td>Largeur</td><td>165 cm</td><td>200 cm</td></tr><tr><td>Hauteur</td><td>150 cm</td><td>165 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=9m3">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-15gr"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-15m3.jpg" alt="Benne 15m³" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">15m³</span></div><div><div class="product-title">BENNE <span>15m³</span></div><div class="product-desc-box"><p class="product-desc-text">La capacité d'une 15m³ avec la praticité du grutage.</p></div><table class="dim-table"><thead><tr><th>15M³ GR</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>530 cm</td><td>560 cm</td></tr><tr><td>Largeur</td><td>200 cm</td><td>215 cm</td></tr><tr><td>Hauteur</td><td>145 cm</td><td>170 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=15m3-grutable">Demander un devis</a>
+ </div>
+ </div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ </div>
+ </div><div class="sub-panel" id="b-30m3"><div class="product-detail"><div class="product-img-zone"><img src="../images/benne-30m3.jpg" alt="Benne 30m³" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">30m³</span></div><div><div class="product-title">BENNE <span>30m³</span></div><div class="product-desc-box"><p class="product-desc-text">Le choix des très gros volumes. Limite les rotations et optimise les coûts logistiques.</p></div><table class="dim-table"><thead><tr><th>30M³</th><th>Intérieure</th><th>Extérieure</th></tr></thead><tbody><tr><td>Longueur</td><td>—</td><td>600 cm</td></tr><tr><td>Largeur</td><td>—</td><td>230 cm</td></tr><tr><td>Hauteur</td><td>—</td><td>240 cm</td></tr></tbody></table></div></div>
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Devis pour ce format</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=benne&taille=30m3">Demander un devis</a>
+ </div>
+ </div><div class="sub-panel" id="b-svc"><div class="section-title-block"><h2>Description <span>du service</span></h2></div><div class="desc-service-grid"><p class="desc-service-text">Nos bennes sont acheminées directement sur votre chantier. Le chauffeur dépose la benne à l'emplacement convenu.<br><br>Une fois pleine, nous venons la récupérer et pouvons la remplacer par une benne vide.<br><br><strong style="color:var(--vert);">Déchets :</strong> Bois · DIB · Inertes · Cartons · Plastiques · Végétaux · Gravats</p><div class="desc-service-img"><img src="../images/bennes-service.jpg" alt="Service Bennes" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div></div></div>
+ </div>
+</div>
+ <div class="sub-panel" id="b-schema" style="padding-top:24px;">
+  <div class="section-title-block" style="margin-bottom:20px;">
+   <h2>Tableau <span>récapitulatif</span></h2>
+   <p>1 déchet par contenant — Déchets acceptés et gabarit de véhicule par format</p>
+  </div>
+
+  <!-- Bannière 1 déchet par contenant -->
+  <div style="padding:14px 20px;background:var(--vert-dim);border:1px solid var(--vert-dark);margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+   <div style="width:3px;height:36px;background:var(--vert);flex-shrink:0;"></div>
+   <div>
+    <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);letter-spacing:1px;text-transform:uppercase;">1 déchet par contenant</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Chaque benne est dédiée à un seul flux de déchet pour optimiser le tri et la valorisation.</div>
+   </div>
+  </div>
+
+  <style>
+   .stbl{width:100%;border-collapse:collapse;margin-top:0;}
+   .stbl th,.stbl td{border:1px solid var(--border);padding:12px 14px;text-align:center;font-size:13px;}
+   .stbl thead tr:first-child th{background:var(--bg3);font-family:"Bebas Neue",sans-serif;font-size:15px;letter-spacing:1px;color:var(--text);}
+   .stbl thead tr:last-child th{background:var(--bg2);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);}
+   .stbl td:first-child{text-align:left;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--text);font-weight:600;background:var(--bg2);white-space:nowrap;}
+   .tok{color:#2ECC71;font-size:16px;font-weight:700;}
+   .tno{color:var(--border2);font-size:18px;}
+   .tvl{display:inline-block;padding:3px 10px;background:var(--vert-dim);border:1px solid var(--vert-dark);font-size:10px;letter-spacing:2px;color:var(--vert);font-family:"Syne",sans-serif;font-weight:700;}
+   .tpl{display:inline-block;padding:3px 10px;background:rgba(200,150,50,.12);border:1px solid rgba(200,150,50,.4);font-size:10px;letter-spacing:2px;color:#c89632;font-family:"Syne",sans-serif;font-weight:700;}
+  </style>
+
+  <div style="overflow-x:auto;">
+   <table class="stbl">
+    <thead>
+     <tr>
+      <th style="text-align:left;">Déchet</th>
+      <th>2m³</th>
+      <th>6m³</th>
+      <th>9m³</th>
+      <th>8m³ Étroite</th>
+      <th>8m³ Bateau</th>
+      <th>15m³</th>
+      <th>30m³</th>
+     </tr>
+     <tr>
+      <th style="text-align:left;">Gabarit</th>
+      <th><span class="tvl">VL</span></th>
+      <th><span class="tvl">VL</span></th>
+      <th><span class="tvl">VL</span></th>
+      <th><span class="tpl">PL / SPL</span></th>
+      <th><span class="tpl">PL / SPL</span></th>
+      <th><span class="tpl">PL / SPL</span></th>
+      <th><span class="tpl">PL / SPL</span></th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>Bois</td>
+      <td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td>
+     </tr>
+     <tr>
+      <td>D.I.B.</td>
+      <td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td>
+     </tr>
+     <tr>
+      <td>Déchets verts</td>
+      <td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td>
+     </tr>
+     <tr>
+      <td>Papier / Carton</td>
+      <td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td><td class="tok">✓</td>
+     </tr>
+     <tr>
+      <td>Gravats</td>
+      <td class="tok">✓</td>
+      <td class="tno">—</td>
+      <td class="tno">—</td>
+      <td class="tok">✓</td>
+      <td class="tok">✓</td>
+      <td class="tno">—</td>
+      <td class="tno">—</td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+
+  <div style="display:flex;gap:28px;margin-top:18px;flex-wrap:wrap;align-items:center;">
+   <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);"><span class="tok" style="font-size:13px;">✓</span> Accepté</div>
+   <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);"><span class="tno" style="font-size:13px;">—</span> Non accepté</div>
+   <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);"><span class="tvl">VL</span> Véhicule léger</div>
+   <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);"><span class="tpl">PL / SPL</span> Poids lourd — prévoir accès adapté</div>
+  </div>
+
+  <div style="margin-top:18px;padding:16px 20px;background:var(--bg3);border-left:3px solid var(--vert-dark);font-size:13px;color:var(--text-muted);line-height:1.7;">
+   <strong style="color:var(--text);">Gravats</strong> — Non acceptés dans les 6m³, 9m³, 15m³ et 30m³ en raison du poids maximal autorisé pour ces formats. Pour les gravats, utilisez la <strong style="color:var(--vert);">2m³</strong> (VL) ou les <strong style="color:var(--vert);">8m³</strong> (PL/SPL).
+  </div>
+ </div>
+
+
+
+
+<script
+
+
+<script>
+(function(){
+ /* CURSOR */
+  (function(){
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,vis=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=mx+'px';dot.style.top=my+'px';
+      if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='.5';}
+    });
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  })();
+
+ /* CONFIG */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+
+ /* APPLIQUER THÈME */
+ function apply(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+
+ /* checkbox */
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+
+ /* logos actifs */
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.classList.toggle('active', b.getAttribute('data-brand')===theme);
+ });
+
+ /* MASQUER / MONTRER liens header */
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ var p=l.getAttribute('data-page');
+ if(!p) return;
+ l.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* tiles accueil */
+ document.querySelectorAll('.service-tile').forEach(function(t){
+ var p=t.getAttribute('data-page');
+ if(!p) return;
+ t.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* adresses */
+ document.querySelectorAll('[data-adresse]').forEach(function(el){
+ el.textContent=ADRESSES[theme];
+ });
+
+ /* redirection si page interdite */
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ if(cur==='') cur='index.html';
+ if(ALLOW[theme].indexOf(cur)===-1){
+ var inPages=window.location.pathname.indexOf('/pages/')!==-1;
+ window.location.replace(inPages?'../index.html':'index.html');
+ }
+ }
+
+ /* INIT — défaut recyclage */
+ var saved=null; try{saved=localStorage.getItem('theme');}catch(e){}
+ apply(saved||'recyclage');
+
+ /* CHECKBOX */
+ var cb2=document.getElementById('themeToggle');
+ if(cb2) cb2.addEventListener('change',function(){apply(this.checked?'ceferka':'recyclage');});
+
+ /* LOGOS CLIQUABLES */
+ // logos gèrent le thème via onclick + navigation native
+
+ /* LIEN ACTIF */
+ var cur2=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ l.classList.toggle('active', l.getAttribute('data-page')===cur2);
+ });
+})();
+
+function showSubPanel(id,btn){
+ document.querySelectorAll('.sub-panel').forEach(function(p){p.classList.remove('active');});
+ document.querySelectorAll('.sub-nav-btn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById(id).classList.add('active');
+ if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

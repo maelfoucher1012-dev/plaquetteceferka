@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Nos Caisses</title>
+ <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link active" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fer &amp; Métaux</a>
+ <a class="nav-link" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;display:flex;flex-direction:column;">
+ <div class="section-hero">
+ <div class="section-hero-left">
+ <div class="section-tag">Nos produits — Caisses</div>
+ <h1 class="section-h1">NOS <span>CAISSES</span></h1>
+ <p class="section-desc">Conteneurs plastique sur base palette, manipulables par chariots élévateurs ou transpalettes. Empilables.</p>
+ </div>
+ <div class="section-hero-right"><img src="../images/caisses-hero.jpg" alt="" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">IMG</span></div>
+ </div>
+ <div style="padding:56px 64px;">
+ <div class="product-detail">
+ <div class="product-img-zone" style="min-height:320px;"><span class="hero-placeholder">PALETTE</span></div>
+ <div>
+ <div class="product-title">CAISSES <span>PALETTES</span></div>
+ <div class="product-desc-box"><p class="product-desc-text">Conteneurs en plastique montés sur base palette. Manipulables avec chariots élévateurs ou transpalettes. Empilables pour optimiser l'espace de stockage.</p></div>
+ <div class="info-grid">
+ <div class="info-card"><div class="info-label">Matériau</div><div class="info-card-val">Polyéthylène haute densité</div></div>
+ <div class="info-card"><div class="info-label">Manipulation</div><div class="info-card-val">Chariot élévateur · Transpalette</div></div>
+ <div class="info-card"><div class="info-label">Stockage</div><div class="info-card-val">Empilables</div></div>
+ <div class="info-card"><div class="info-label">Usage</div><div class="info-card-val">Tri sélectif · Métaux · Déchets</div></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="cta-devis-block">
+ <div class="cta-devis-text">
+ <strong>Demander un devis — Caisses palettes</strong>
+ Obtenir un devis rapide pour ce service. Réponse sous 24h, sans engagement.
+ </div>
+ <a class="cta-devis-btn" href="contact.html?service=caisses">Demander un devis</a>
+ </div>
+ </div>
+</div>
+
+
+<script>
+(function(){
+ /* CURSOR */
+  (function(){
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,vis=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=mx+'px';dot.style.top=my+'px';
+      if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='.5';}
+    });
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  })();
+
+ /* CONFIG */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+
+ /* APPLIQUER THÈME */
+ function apply(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+
+ /* checkbox */
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+
+ /* logos actifs */
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.classList.toggle('active', b.getAttribute('data-brand')===theme);
+ });
+
+ /* MASQUER / MONTRER liens header */
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ var p=l.getAttribute('data-page');
+ if(!p) return;
+ l.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* tiles accueil */
+ document.querySelectorAll('.service-tile').forEach(function(t){
+ var p=t.getAttribute('data-page');
+ if(!p) return;
+ t.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* adresses */
+ document.querySelectorAll('[data-adresse]').forEach(function(el){
+ el.textContent=ADRESSES[theme];
+ });
+
+ /* redirection si page interdite */
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ if(cur==='') cur='index.html';
+ if(ALLOW[theme].indexOf(cur)===-1){
+ var inPages=window.location.pathname.indexOf('/pages/')!==-1;
+ window.location.replace(inPages?'../index.html':'index.html');
+ }
+ }
+
+ /* INIT — défaut recyclage */
+ var saved=null; try{saved=localStorage.getItem('theme');}catch(e){}
+ apply(saved||'recyclage');
+
+ /* CHECKBOX */
+ var cb2=document.getElementById('themeToggle');
+ if(cb2) cb2.addEventListener('change',function(){apply(this.checked?'ceferka':'recyclage');});
+
+ /* LOGOS CLIQUABLES */
+ // logos gèrent le thème via onclick + navigation native
+
+ /* LIEN ACTIF */
+ var cur2=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ l.classList.toggle('active', l.getAttribute('data-page')===cur2);
+ });
+})();
+
+function showSubPanel(id,btn){
+ document.querySelectorAll('.sub-panel').forEach(function(p){p.classList.remove('active');});
+ document.querySelectorAll('.sub-nav-btn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById(id).classList.add('active');
+ if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

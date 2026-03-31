@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Contact — Devis</title>
+ <link rel="stylesheet" href="../css/style.css">
+ <style>
+ .contact-hero {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ min-height: calc(100vh - 80px);
+ }
+ .contact-left {
+ padding: 64px;
+ background: var(--bg);
+ border-right: 1px solid var(--border);
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ }
+ .contact-right {
+ padding: 64px;
+ background: var(--bg2);
+ overflow-y: auto;
+ }
+
+ /* Autocomplétion adresse */
+ .addr-wrap { position: relative; }
+ .addr-suggestions {
+ position: absolute; top: 100%; left: 0; right: 0;
+ background: var(--bg2); border: 1px solid var(--border2); border-top: none;
+ z-index: 300; max-height: 260px; overflow-y: auto; display: none;
+ box-shadow: 0 8px 24px rgba(0,0,0,.2);
+ }
+ .addr-suggestions.open { display: block; }
+ .addr-item {
+ padding: 12px 16px; font-size: 13px; color: var(--text);
+ cursor: pointer; border-bottom: 1px solid var(--border);
+ display: flex; align-items: flex-start; gap: 10px;
+ transition: background .15s; line-height: 1.4;
+ }
+ .addr-item:last-child { border-bottom: none; }
+ .addr-item:hover, .addr-item.sel { background: var(--vert-dim); }
+ .addr-icon { color: var(--vert); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+ .addr-main { font-weight: 500; }
+ .addr-sub { font-size: 11px; color: var(--text-muted); font-weight: 300; }
+ .addr-loading { padding: 12px 16px; font-size: 12px; color: var(--text-muted); font-style: italic; }
+ </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link" href="fer.html" data-page="fer.html">Fers &amp; Métaux</a>
+ <a class="nav-link" href="calculateur.html" data-page="calculateur.html">Calculateur</a>
+ <a class="nav-link" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link active" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;">
+ <div class="contact-hero">
+
+ <!-- Colonne gauche : coordonnées -->
+ <div class="contact-left">
+ <div>
+ <div class="section-tag">Nous contacter</div>
+ <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5vw,80px);line-height:.9;color:var(--text);margin-bottom:48px;">
+ Travaillons<br><span style="color:var(--vert);">ensemble.</span>
+ </h1>
+
+ <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:40px;">
+ <div class="contact-item">
+ <div class="contact-label"> Adresse</div>
+ <div class="contact-val" data-adresse>12 rue Nicéphore Niépce, Andernos-les-Bains</div>
+ </div>
+ <div class="contact-item">
+ <div class="contact-label"> Téléphone</div>
+ <div class="contact-val">05 56 60 84 71</div>
+ </div>
+ <div class="contact-item">
+ <div class="contact-label"> Site web</div>
+ <div class="contact-val">www.ceferka.fr</div>
+ </div>
+ <div class="contact-item">
+ <div class="contact-label"> Horaires</div>
+ <div class="contact-val">Lun – Ven · 7h00 – 18h00</div>
+ </div>
+ </div>
+
+ <div class="btn-row">
+ <a class="btn-primary" href="tel:0556608471">Appeler</a>
+ <a class="btn-outline" href="/cdn-cgi/l/email-protection#91f2feffe5f0f2e5d1f2f4f7f4e3faf0bff7e3">Email</a>
+ </div>
+ </div>
+
+ <div>
+ <p class="info-label" style="margin-bottom:12px;">Zone d'intervention</p>
+ <div class="tags-row">
+ <span class="tag">Andernos</span>
+ <span class="tag">Arcachon</span>
+ <span class="tag">La Teste</span>
+ <span class="tag">Lège-Cap-Ferret</span>
+ <span class="tag">Gujan-Mestras</span>
+ <span class="tag">Le Teich</span>
+ <span class="tag">Biganos</span>
+ <span class="tag">Bordeaux</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- Colonne droite : formulaire devis -->
+ <div class="contact-right">
+ <div class="section-title-block" style="margin-bottom:28px;">
+ <h2>Devis <span>rapide</span></h2>
+ <p>Réponse sous 24h — Sans engagement — Déplacement gratuit</p>
+ </div>
+
+ <!-- Bandeau pré-remplissage (activé via URL ?service=...) -->
+ <div class="prefill-banner" id="prefillBanner">
+ <span style="font-size:18px;"></span>
+ <span>Service pré-sélectionné : <strong id="prefillLabel"></strong></span>
+ </div>
+
+ <div style="display:flex;flex-direction:column;gap:14px;">
+
+ <!-- Nom + Téléphone -->
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+ <div class="form-field">
+ <label class="info-label">Nom / Société</label>
+ <input id="fNom" class="form-input" type="text" placeholder="Ex : Martin BTP">
+ </div>
+ <div class="form-field">
+ <label class="info-label">Téléphone</label>
+ <input id="fTel" class="form-input" type="tel" placeholder="06 XX XX XX XX">
+ </div>
+ </div>
+
+ <!-- Service demandé -->
+ <div class="form-field">
+ <label class="info-label">Service demandé</label>
+ <select id="fService" class="form-input">
+ <option value="">Choisir un service...</option>
+ <optgroup label="Location Box">
+ <option value="box">Location de Box (général)</option>
+ </optgroup>
+ <optgroup label="Location Bennes">
+ <option value="benne">Location de Benne (général)</option>
+ </optgroup>
+ <optgroup label="Autres services">
+ <option value="caisses">Caisses palettes</option>
+ <option value="chargement">Chargement immédiat</option>
+ <option value="decheterie">Déchèterie professionnelle</option>
+ <option value="fer">Rachat fers et métaux</option>
+ <option value="autre">Autre demande</option>
+ </optgroup>
+ </select>
+ </div>
+
+ <!-- Taille (box ou benne uniquement) -->
+ <div class="form-field" id="fieldTaille" style="display:none;">
+ <label class="info-label">Taille souhaitée</label>
+ <select id="fTaille" class="form-input">
+ <option value="">Choisir une taille...</option>
+ </select>
+ </div>
+
+ <!-- Quantité -->
+ <div class="form-field" id="fieldQte" style="display:none;">
+ <label class="info-label">Quantité</label>
+ <select id="fQte" class="form-input">
+ <option value="1">1 unité</option>
+ <option value="2">2 unités</option>
+ <option value="3">3 unités</option>
+ <option value="4+">4 unités et plus</option>
+ </select>
+ </div>
+
+ <!-- Adresse du chantier avec autocomplétion -->
+ <div class="form-field">
+ <label class="info-label">Adresse du chantier / livraison</label>
+ <div class="addr-wrap">
+ <input id="fAdresse" class="form-input" type="text"
+ placeholder="Commencez à taper votre adresse..." autocomplete="off">
+ <div class="addr-suggestions" id="addrSug"></div>
+ </div>
+ </div>
+
+ <!-- Message -->
+ <div class="form-field">
+ <label class="info-label">Message (optionnel)</label>
+ <textarea id="fMessage" class="form-input" rows="4"
+ placeholder="Précisez votre besoin, délai souhaité..." style="resize:vertical;"></textarea>
+ </div>
+
+ <!-- Bouton envoi -->
+ <button class="btn-primary" type="button" id="btnEnvoyer" style="width:fit-content;margin-top:4px;">
+ Envoyer la demande
+ </button>
+
+ <!-- Confirmation -->
+ <div id="formConfirm" style="display:none;padding:16px 20px;background:var(--vert-dim);border:1px solid var(--vert-dark);font-size:13px;color:var(--vert);">
+ Votre demande a bien été envoyée. Nous vous recontactons sous 24h.
+ </div>
+
+ </div>
+ </div>
+
+ </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+
+ /* ── CURSOR ── */
+  (function(){
+    var dot  = document.getElementById('cursor');
+    var ring = document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,visible=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX; my=e.clientY;
+      dot.style.left=mx+'px'; dot.style.top=my+'px';
+      if(!visible){ visible=true; dot.style.opacity='1'; ring.style.opacity='.5'; }
+    });
+    (function loop(){
+      rx+=(mx-rx)*.13; ry+=(my-ry)*.13;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      requestAnimationFrame(loop);
+    })();
+  })();
+
+ /* THÈME */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html','chargement.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+ function applyTheme(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+ document.querySelectorAll('.nav-brand').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-brand')===theme);});
+ document.querySelectorAll('.nav-link').forEach(function(l){var p=l.getAttribute('data-page');if(!p)return;l.style.display=ALLOW[theme].indexOf(p)!==-1?'':'none';});
+ document.querySelectorAll('[data-adresse]').forEach(function(el){el.textContent=ADRESSES[theme];});
+ }
+ var saved=null;try{saved=localStorage.getItem('theme');}catch(e){}
+ applyTheme(saved||'recyclage');
+ var cbEl=document.getElementById('themeToggle');
+ if(cbEl) cbEl.addEventListener('change',function(){applyTheme(this.checked?'ceferka':'recyclage');});
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.addEventListener('click',function(e){e.preventDefault();applyTheme(b.getAttribute('data-brand'));});
+ });
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){l.classList.toggle('active',l.getAttribute('data-page')===cur);});
+
+ /* TAILLES PAR SERVICE */
+ var TAILLES={
+ box: ['1m3','5m3','10m3'],
+ benne: ['2m3','6m3','8m3 Etroite','8m3 Bateau','9m3','15m3 Grutable','15m3 Bateau','30m3']
+ };
+ var LABELS={
+ box:'Location de Box', benne:'Location de Benne',
+ caisses:'Caisses palettes', chargement:'Chargement immédiat',
+ decheterie:'Déchèterie professionnelle', fer:'Rachat fers et métaux', autre:'Autre demande'
+ };
+
+ function updateTaille(service, prefill){
+ var ft=document.getElementById('fieldTaille');
+ var st=document.getElementById('fTaille');
+ var fq=document.getElementById('fieldQte');
+ if(service==='box'||service==='benne'){
+ ft.style.display=''; fq.style.display='';
+ st.innerHTML='<option value="">Choisir une taille...</option>';
+ TAILLES[service].forEach(function(t){
+ var o=document.createElement('option');o.value=t;o.textContent=t;st.appendChild(o);
+ });
+ if(prefill){
+ var norm=prefill.replace(/-/g,' ');
+ for(var i=0;i<st.options.length;i++){
+ if(st.options[i].value.toLowerCase()===norm.toLowerCase()){st.selectedIndex=i;break;}
+ }
+ }
+ } else { ft.style.display='none'; fq.style.display='none'; }
+ }
+
+ document.getElementById('fService').addEventListener('change',function(){updateTaille(this.value,null);});
+
+ /* PRÉ-REMPLISSAGE DEPUIS URL */
+ (function prefill(){
+ var params=new URLSearchParams(window.location.search);
+ var service=params.get('service'), taille=params.get('taille');
+ if(!service) return;
+ var sel=document.getElementById('fService');
+ for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===service){sel.selectedIndex=i;break;}}
+ updateTaille(service,taille);
+ var banner=document.getElementById('prefillBanner');
+ var label=document.getElementById('prefillLabel');
+ var texte=LABELS[service]||service;
+ if(taille) texte+=' — '+taille.replace(/-/g,' ');
+ label.textContent=texte;
+ banner.classList.add('visible');
+ setTimeout(function(){document.getElementById('fService').scrollIntoView({behavior:'smooth',block:'center'});},300);
+ })();
+
+ /* ══ AUTOCOMPLÉTION ADRESSE — API Gouvernement France ══ */
+ (function(){
+   var inp    = document.getElementById('fAdresse');
+   var sugBox = document.getElementById('addrSug');
+   if(!inp || !sugBox) return;
+   var timer=null, selIdx=-1, results=[];
+
+   function hide(){
+     sugBox.classList.remove('open');
+     sugBox.innerHTML='';
+   }
+
+   function pick(idx){
+     var f=results[idx]; if(!f) return;
+     inp.value = f.properties.label||'';
+     hide();
+   }
+
+   function render(features){
+     results=features; selIdx=-1;
+     if(!features.length){ hide(); return; }
+     sugBox.innerHTML=features.map(function(f,i){
+       var p=f.properties;
+       var main=p.label||'';
+       var sub=(p.postcode||'')+' '+(p.city||'');
+       return '<div class="addr-item" data-idx="'+i+'">'
+         +'<div><div class="addr-main">'+main+'</div>'
+         +'<div class="addr-sub">'+sub.trim()+'</div></div>'
+         +'</div>';
+     }).join('');
+     sugBox.classList.add('open');
+     sugBox.querySelectorAll('.addr-item').forEach(function(el){
+       el.addEventListener('mousedown',function(e){
+         e.preventDefault();
+         pick(parseInt(el.getAttribute('data-idx')));
+       });
+     });
+   }
+
+   function search(q){
+     if(q.length<3){ hide(); return; }
+     sugBox.innerHTML='<div class="addr-loading">Recherche...</div>';
+     sugBox.classList.add('open');
+     fetch('https://api-adresse.data.gouv.fr/search/?q='+encodeURIComponent(q)+'&limit=6&autocomplete=1')
+       .then(function(r){ return r.json(); })
+       .then(function(d){ render(d.features||[]); })
+       .catch(function(){ hide(); });
+   }
+
+   inp.addEventListener('input',function(){
+     clearTimeout(timer);
+     var v=this.value.trim();
+     timer=setTimeout(function(){ search(v); },300);
+   });
+
+   inp.addEventListener('keydown',function(e){
+     var items=sugBox.querySelectorAll('.addr-item');
+     if(!sugBox.classList.contains('open')||!items.length) return;
+     if(e.key==='ArrowDown'){
+       selIdx=Math.min(selIdx+1,items.length-1);
+       items.forEach(function(el,i){ el.classList.toggle('sel',i===selIdx); });
+       e.preventDefault();
+     } else if(e.key==='ArrowUp'){
+       selIdx=Math.max(selIdx-1,0);
+       items.forEach(function(el,i){ el.classList.toggle('sel',i===selIdx); });
+       e.preventDefault();
+     } else if(e.key==='Enter'&&selIdx>=0){
+       pick(selIdx); e.preventDefault();
+     } else if(e.key==='Escape'){
+       hide();
+     }
+   });
+
+   document.addEventListener('click',function(e){
+     if(!e.target.closest('.addr-wrap')) hide();
+   });
+ })();
+
+ /* BOUTON ENVOYER */
+ document.getElementById('btnEnvoyer').addEventListener('click',function(){
+ var nom=document.getElementById('fNom').value.trim();
+ var tel=document.getElementById('fTel').value.trim();
+ if(!nom||!tel){alert('Merci de renseigner votre nom et votre tél

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Fers et Métaux</title>
+ <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="topnav">
+ <div class="nav-logos">
+ <a class="nav-brand" data-brand="ceferka" href="../index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+ <img src="../images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+ </a>
+ <div class="nav-divider"></div>
+ <a class="nav-brand" data-brand="recyclage" href="../index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+ <img src="../images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+ onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+ <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+ </a>
+ <div class="brand-toggle-wrap">
+ <label class="brand-toggle">
+ <input type="checkbox" id="themeToggle">
+ <div class="toggle-track"><div class="toggle-thumb"></div></div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ </label>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a class="nav-link" href="../index.html" data-page="index.html">Accueil</a>
+ <a class="nav-link" href="box.html" data-page="box.html">Box</a>
+ <a class="nav-link" href="bennes.html" data-page="bennes.html">Bennes</a>
+ <a class="nav-link" href="caisses.html" data-page="caisses.html">Caisses</a>
+ <a class="nav-link active" href="fer.html" data-page="fer.html">Fers &amp; Métaux</a>
+ <a class="nav-link" href="decheterie.html" data-page="decheterie.html">Déchèterie</a>
+ <a class="nav-link" href="chargement.html" data-page="chargement.html">Chargement</a>
+ <a class="nav-link" href="contact.html" data-page="contact.html">Contact</a>
+ </div>
+</nav>
+
+<div class="page-wrapper" style="padding-top:80px;display:flex;flex-direction:column;">
+ <div class="section-hero">
+ <div class="section-hero-left">
+ <div class="section-tag">Nos services — Rachat métaux</div>
+ <h1 class="section-h1">FERS &amp; <span>MÉTAUX</span></h1>
+ <p class="section-desc">Votre partenaire de confiance pour le rachat de fers et métaux. Prix basés sur les cours du marché, ajustés chaque semaine.</p>
+ </div>
+ <a class="section-hero-right" href="chargement.html" style="text-decoration:none;cursor:pointer;position:relative;" title="Voir le service chargement"><img src="../images/fer-hero.jpg" alt="Fers et Métaux" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="hero-placeholder" style="display:none;">MÉTAUX</span><div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);padding:8px 20px;border:1px solid var(--vert);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--vert);background:var(--bg3);white-space:nowrap;">Voir le service chargement →</div></a>
+ </div>
+ <div class="sub-nav">
+ <div class="sub-nav-btn active" onclick="showSubPanel('f-desc',this)">Description</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('f-metaux',this)">Métaux rachetés</div>
+ <div class="sub-nav-btn" onclick="showSubPanel('f-svc',this)">Service chargement</div>
+ </div>
+ <div class="sub-panels">
+ <div class="sub-panel active" id="f-desc">
+ <div class="desc-service-grid">
+ <div>
+ <div class="product-desc-box"><p class="product-desc-text">Nous nous adressons aux particuliers, professionnels, artisans et commerçants. Prix compétitifs basés sur les cours du marché.<br><br>Prix ajustés chaque semaine avec des <strong style="color:var(--vert);">offres flash hebdomadaires</strong>.<br><br>Pour les gros volumes : chargement immédiat par grue sur berce.</p></div>
+ <div style="margin-top:24px;padding:20px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;gap:16px;">
+ <span style="font-size:28px;"></span>
+ <div><div class="info-label">Pièce d'identité obligatoire</div><p style="font-size:13px;color:var(--text-muted);margin-top:4px;">Présentez votre pièce d'identité valide pour une transaction rapide et sécurisée.</p></div>
+ </div>
+ <div style="margin-top:12px;padding:16px 20px;background:var(--bg3);border:1px solid var(--border);">
+ <div class="info-label"> Adresse</div>
+ <div style="font-size:14px;color:var(--text);margin-top:4px;" data-adresse>9 avenue Gustave Eiffel, Andernos-les-Bains</div>
+ </div>
+ </div>
+ <div class="desc-service-img"></div>
+ </div>
+ </div>
+     <div class="sub-panel" id="f-metaux">
+      <div class="section-title-block"><h2>Métaux <span>rachetés</span></h2><p>Prix du marché — mis à jour régulièrement — confirmation sur site</p></div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:8px;">
+
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Cuivre mêlé</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">8,40 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Cuivre déposé (tube neuf)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">9,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Cuivre étamé</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">7,20 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Cuivre Milberry</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">9,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Compteur d'eau</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">2,50 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Laiton</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">4,40 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Douille</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">4,40 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Radiateur 1/2 rouge</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">4,20 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Radiateur cuivre/alu</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">3,80 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Aluminium (alu)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,90 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Jante alu</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">1,50 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Carter</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,90 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">AGS</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">1,20 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Zinc</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">1,40 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Plomb</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,70 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Inox</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,40 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Moteur électrique</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,50 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Câbles 42%</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">2,70 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Câble DEEE 20%</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">1,30 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Câble alu</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">0,50 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par kg</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Ferraille</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">130,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Fonte VF2</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">170,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Platin</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">60,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Batterie</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">300,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Ferreux</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">270,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">DI / OA</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">170,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Fonte VF1</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">190,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);padding:18px;">
+          <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">GEMHF</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--vert);">60,00 €</div>
+          <div style="font-size:11px;color:var(--text-muted);">par tonne</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="sub-panel" id="f-svc">
+ <div class="desc-service-grid">
+ <div><div class="section-title-block"><h2>Chargement <span>immédiat</span></h2></div><div class="product-desc-box"><p class="product-desc-text">Pour les gros volumes, service de chargement immédiat grâce à notre grue sur berce avec grappin.<br><br>Nos camions accèdent aux zones les plus difficiles. Valorisation maximale et rachat sur place.</p></div></div>
+ <div class="desc-service-img"><img src="../images/fer-desc.jpg" alt="Fers et Métaux" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div>
+ </div>
+ <div class="cta-devis-block" style="margin-top:28px;">
+  <div class="cta-devis-text">
+   <strong>En savoir plus sur le service chargement</strong>
+   Découvrez en détail nos équipements et notre méthode d'intervention.
+  </div>
+  <a class="cta-devis-btn" href="chargement.html">Voir la page chargement</a>
+ </div>
+ </div>
+ </div>
+</div>
+
+
+<script>
+(function(){
+ /* CURSOR */
+  (function(){
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,vis=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=mx+'px';dot.style.top=my+'px';
+      if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='.5';}
+    });
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  })();
+
+ /* CONFIG */
+ var ALLOW={
+ recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+ ceferka: ['index.html','fer.html','contact.html','calculateur.html','chargement.html']
+ };
+ var ADRESSES={
+ recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+ ceferka: '9 avenue Gustave Eiffel, Andernos-les-Bains'
+ };
+
+ /* APPLIQUER THÈME */
+ function apply(theme){
+ try{localStorage.setItem('theme',theme);}catch(e){}
+ document.documentElement.setAttribute('data-theme',theme);
+
+ /* checkbox */
+ var cb=document.getElementById('themeToggle');
+ if(cb) cb.checked=(theme==='ceferka');
+
+ /* logos actifs */
+ document.querySelectorAll('.nav-brand').forEach(function(b){
+ b.classList.toggle('active', b.getAttribute('data-brand')===theme);
+ });
+
+ /* MASQUER / MONTRER liens header */
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ var p=l.getAttribute('data-page');
+ if(!p) return;
+ l.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* tiles accueil */
+ document.querySelectorAll('.service-tile').forEach(function(t){
+ var p=t.getAttribute('data-page');
+ if(!p) return;
+ t.style.display = ALLOW[theme].indexOf(p)!==-1 ? '' : 'none';
+ });
+
+ /* adresses */
+ document.querySelectorAll('[data-adresse]').forEach(function(el){
+ el.textContent=ADRESSES[theme];
+ });
+
+ /* redirection si page interdite */
+ var cur=window.location.pathname.split('/').pop()||'index.html';
+ if(cur==='') cur='index.html';
+ if(ALLOW[theme].indexOf(cur)===-1){
+ var inPages=window.location.pathname.indexOf('/pages/')!==-1;
+ window.location.replace(inPages?'../index.html':'index.html');
+ }
+ }
+
+ /* INIT — défaut recyclage */
+ var saved=null; try{saved=localStorage.getItem('theme');}catch(e){}
+ apply(saved||'recyclage');
+
+ /* CHECKBOX */
+ var cb2=document.getElementById('themeToggle');
+ if(cb2) cb2.addEventListener('change',function(){apply(this.checked?'ceferka':'recyclage');});
+
+ /* LOGOS CLIQUABLES */
+ // logos gèrent le thème via onclick + navigation native
+
+ /* LIEN ACTIF */
+ var cur2=window.location.pathname.split('/').pop()||'index.html';
+ document.querySelectorAll('.nav-link').forEach(function(l){
+ l.classList.toggle('active', l.getAttribute('data-page')===cur2);
+ });
+})();
+
+function showSubPanel(id,btn){
+ document.querySelectorAll('.sub-panel').forEach(function(p){p.classList.remove('active');});
+ document.querySelectorAll('.sub-nav-btn').forEach(function(b){b.classList.remove('active');});
+ document.getElementById(id).classList.add('active');
+ if(btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

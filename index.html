@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="recyclage">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { overflow-x: hidden; }
+
+    /* ══════════════════════════════════════
+       LAYOUT GÉNÉRAL — plein écran sans scroll
+    ══════════════════════════════════════ */
+    .page-home {
+      height: calc(100vh - 80px);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding-top: 80px;
+      box-sizing: border-box;
+    }
+
+    /* ══════════════════════════════════════
+       HEADER — une seule ligne compacte
+    ══════════════════════════════════════ */
+    .ph {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0;
+      border-bottom: 2px solid var(--vert);
+      background: var(--bg);
+      height: 72px;
+      padding: 0;
+    }
+
+    /* Nom entité */
+    .ph-brand {
+      padding: 0 40px;
+      border-right: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .ph-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    .ph-brand-name .v { color: var(--vert); }
+
+    /* Description centre */
+    .ph-desc {
+      padding: 0 40px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* Infos droite */
+    .ph-right {
+      padding: 0 40px;
+      border-left: 1px solid var(--border);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .ph-info {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ph-dot {
+      width: 4px; height: 4px;
+      background: var(--vert);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    /* ══════════════════════════════════════
+       GRILLE SERVICES — remplit tout
+    ══════════════════════════════════════ */
+    .srv-grid {
+      display: grid;
+      /* 3 colonnes égales */
+      grid-template-columns: repeat(3, 1fr);
+      /* lignes automatiques qui remplissent l'espace dispo */
+      grid-auto-rows: 1fr;
+      gap: 1px;
+      background: var(--border);
+      height: 100%;
+    }
+
+    .srv-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 32px;
+      text-decoration: none;
+      overflow: hidden;
+      background: var(--bg2);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+        /* ── Calque fond pour tiles sans photo ── */
+    .srv-item::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background: var(--bg2);
+      opacity: .9;
+      transition: background .4s, opacity .4s;
+    }
+    /* Avec photo : pas de calque au repos */
+    .srv-item[style*="background-image"]::before {
+      background: rgba(0,0,0,0);
+      opacity: 1;
+    }
+    /* Au hover : assombrir avec calque noir */
+    .srv-item[style*="background-image"]:hover::before {
+      background: rgba(0,0,0,.55);
+      opacity: 1;
+    }
+
+    /* ── Dégradé bas → haut ── */
+    .srv-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 65%;
+      background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.55) 55%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .srv-item[style*="background-image"]::after { opacity: 1; }
+
+    /* ── Barre verte bas ── */
+    .srv-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 3px; width: 0;
+      background: var(--vert);
+      z-index: 4;
+      transition: width .4s cubic-bezier(.4,0,.2,1);
+    }
+    .srv-item:hover .srv-bar { width: 100%; }
+
+    /* ── Texte bas — disparaît au hover ── */
+    .srv-content {
+      position: absolute;
+      bottom: 28px; left: 32px; right: 32px;
+      z-index: 3;
+      opacity: 1;
+      transition: opacity .3s, transform .3s;
+    }
+    .srv-item:hover .srv-content {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .srv-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 2.2vw, 30px);
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .srv-item[style*="background-image"] .srv-name { color: #fff; }
+    .srv-sub {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .srv-item[style*="background-image"] .srv-sub { color: rgba(255,255,255,.75); }
+
+    /* ── Contenu centré au hover ── */
+    .srv-hover {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      opacity: 0;
+      transform: scale(.96);
+      transition: opacity .35s, transform .35s;
+      pointer-events: none;
+    }
+    .srv-item:hover .srv-hover {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .srv-hover-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 3.8vw, 56px);
+      color: #fff;
+      line-height: .9;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .srv-hover-sub {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.8);
+    }
+
+    /* ── Flèche ── */
+    .srv-arrow {
+      position: absolute;
+      bottom: 28px; right: 32px;
+      font-size: 20px;
+      color: var(--vert);
+      z-index: 4;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all .3s;
+    }
+    .srv-item:hover .srv-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ── Animation entrée ── */
+    @keyframes srvIn {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .srv-item { opacity:0; animation: srvIn .4s ease forwards; }
+    .srv-item:nth-child(1){animation-delay:.03s}
+    .srv-item:nth-child(2){animation-delay:.07s}
+    .srv-item:nth-child(3){animation-delay:.11s}
+    .srv-item:nth-child(4){animation-delay:.15s}
+    .srv-item:nth-child(5){animation-delay:.19s}
+    .srv-item:nth-child(6){animation-delay:.23s}
+    .srv-item:nth-child(7){animation-delay:.27s}
+
+    @keyframes phIn {
+      from{opacity:0;transform:translateY(-8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .ph { animation: phIn .4s ease forwards; }
+
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="nav-logos">
+    <a class="nav-brand" data-brand="ceferka" href="index.html" onclick="try{localStorage.setItem('theme','ceferka')}catch(e){}">
+      <img src="images/logo-ceferka.png" alt="Ceferka" class="nav-logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="nav-logo-fallback">CEFERKA <span>®</span></span>
+    </a>
+    <div class="nav-divider"></div>
+    <a class="nav-brand" data-brand="recyclage" href="index.html" onclick="try{localStorage.setItem('theme','recyclage')}catch(e){}">
+      <img src="images/logo-recyclage.png" alt="Ceferka Recyclage" class="nav-logo-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="nav-logo-fallback">CEFERKA <span>RECYCLAGE®</span></span>
+    </a>
+    <div class="brand-toggle-wrap">
+      <label class="brand-toggle">
+        <input type="checkbox" id="themeToggle">
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+      </label>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link active" href="index.html"             data-page="index.html">Accueil</a>
+    <a class="nav-link"        href="pages/box.html"         data-page="box.html">Box</a>
+    <a class="nav-link"        href="pages/bennes.html"      data-page="bennes.html">Bennes</a>
+    <a class="nav-link"        href="pages/caisses.html"     data-page="caisses.html">Caisses</a>
+    <a class="nav-link"        href="pages/fer.html"         data-page="fer.html">Fers &amp; Métaux</a>
+    <a class="nav-link"        href="pages/calculateur.html" data-page="calculateur.html">Calculateur</a>
+    <a class="nav-link"        href="pages/decheterie.html"  data-page="decheterie.html">Déchèterie</a>
+    <a class="nav-link"        href="pages/chargement.html"  data-page="chargement.html">Chargement</a>
+    <a class="nav-link"        href="pages/contact.html"     data-page="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page-home">
+
+  <!-- HEADER UNE LIGNE -->
+  <div class="ph">
+    <div class="ph-brand">
+      <div class="ph-brand-name" id="phName">
+        CEFERKA <span class="v" id="phSub">RECYCLAGE</span>
+      </div>
+    </div>
+    <div class="ph-desc" id="phDesc">
+      Spécialiste de la location de bennes, du traitement des déchets et du rachat de métaux — Bassin d'Arcachon, Gironde.
+    </div>
+    <div class="ph-right">
+      <div class="ph-info">
+        <span class="ph-dot"></span>
+        <span data-adresse>12 rue Nicéphore Niépce, Andernos-les-Bains</span>
+      </div>
+      <div class="ph-info">
+        <span class="ph-dot"></span>
+        <span>05 56 60 84 71</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRILLE SERVICES PLEIN ÉCRAN -->
+  <div class="srv-grid" id="srvGrid">
+
+    <a class="srv-item" href="pages/box.html" data-page="box.html"
+       style="background-image:url('images/tile-box.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">NOS BOX</div>
+        <div class="srv-hover-sub">1m³ · 5m³ · 10m³</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">NOS BOX</div>
+        <div class="srv-sub">1m³ · 5m³ · 10m³</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/bennes.html" data-page="bennes.html"
+       style="background-image:url('images/tile-bennes.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">NOS BENNES</div>
+        <div class="srv-hover-sub">2m³ à 30m³</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">NOS BENNES</div>
+        <div class="srv-sub">2m³ à 30m³</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/decheterie.html" data-page="decheterie.html"
+       style="background-image:url('images/tile-decheterie.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">DÉCHÈTERIE PRO</div>
+        <div class="srv-hover-sub">Tri · Valorisation · Valobat</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">DÉCHÈTERIE PRO</div>
+        <div class="srv-sub">Tri · Valorisation · Valobat</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/caisses.html" data-page="caisses.html"
+       style="background-image:url('images/tile-caisses.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">NOS CAISSES</div>
+        <div class="srv-hover-sub">Palettes · Conteneurs</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">NOS CAISSES</div>
+        <div class="srv-sub">Palettes · Conteneurs</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/fer.html" data-page="fer.html"
+       style="background-image:url('images/tile-fer.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">FERS &amp; MÉTAUX</div>
+        <div class="srv-hover-sub">Rachat · Prix du marché</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">FERS &amp; MÉTAUX</div>
+        <div class="srv-sub">Rachat · Prix du marché</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/chargement.html" data-page="chargement.html"
+       style="background-image:url('images/tile-chargement.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">CHARGEMENT IMMÉDIAT</div>
+        <div class="srv-hover-sub">Grue sur berce · Grappin</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">CHARGEMENT IMMÉDIAT</div>
+        <div class="srv-sub">Grue sur berce · Grappin</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+    <a class="srv-item" href="pages/calculateur.html" data-page="calculateur.html"
+       style="background-image:url('images/tile-calculateur.jpg');">
+      <div class="srv-bar"></div>
+      <div class="srv-hover">
+        <div class="srv-hover-name">CALCULATEUR</div>
+        <div class="srv-hover-sub">Estimez vos métaux</div>
+      </div>
+      <div class="srv-content">
+        <div class="srv-name">CALCULATEUR</div>
+        <div class="srv-sub">Estimez vos métaux</div>
+      </div>
+      <span class="srv-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- BANDE DEVIS -->
+  <div style="
+    display:grid;
+    grid-template-columns:1fr auto;
+    align-items:center;
+    border-top:1px solid var(--border);
+    background:var(--bg2);
+    height:64px;
+    padding:0 40px;
+    gap:32px;
+  ">
+    <div style="display:flex;align-items:center;gap:32px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--text);letter-spacing:2px;white-space:nowrap;">DEMANDER UN DEVIS</div>
+      <div style="height:20px;width:1px;background:var(--border);"></div>
+      <div style="font-size:11px;color:var(--text-muted);font-weight:300;">Réponse sous 24h · Sans engagement · Déplacement gratuit</div>
+    </div>
+    <div style="display:flex;gap:8px;flex-shrink:0;">
+      <a href="pages/contact.html" class="btn-primary" style="padding:10px 28px;font-size:11px;letter-spacing:2px;text-decoration:none;">Devis en ligne</a>
+      <a href="tel:0556608471"     class="btn-outline"  style="padding:10px 20px;font-size:11px;letter-spacing:2px;text-decoration:none;">05 56 60 84 71</a>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+(function(){
+  (function(){
+    var dot=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+    if(!dot||!ring) return;
+    var mx=0,my=0,rx=0,ry=0,vis=false;
+    document.addEventListener('mousemove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.left=mx+'px';dot.style.top=my+'px';
+      if(!vis){vis=true;dot.style.opacity='1';ring.style.opacity='.5';}
+    });
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  })();
+
+  var ALLOW={
+    recyclage:['index.html','box.html','bennes.html','caisses.html','decheterie.html','chargement.html','contact.html'],
+    ceferka:  ['index.html','fer.html','contact.html','calculateur.html','chargement.html']
+  };
+  var ADRESSES={
+    recyclage:'12 rue Nicéphore Niépce, Andernos-les-Bains',
+    ceferka:  '9 avenue Gustave Eiffel, Andernos-les-Bains'
+  };
+
+  function apply(theme){
+    try{localStorage.setItem('theme',theme);}catch(e){}
+    document.documentElement.setAttribute('data-theme',theme);
+    var cb=document.getElementById('themeToggle');
+    if(cb) cb.checked=(theme==='ceferka');
+
+    document.querySelectorAll('.nav-brand').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-brand')===theme);
+    });
+    document.querySelectorAll('[data-page]').forEach(function(el){
+      var p=el.getAttribute('data-page');if(!p)return;
+      if(el.classList.contains('nav-link')||el.classList.contains('srv-item')){
+        el.style.display=ALLOW[theme].indexOf(p)!==-1?'':'none';
+      }
+    });
+    document.querySelectorAll('[data-adresse]').forEach(function(el){el.textContent=ADRESSES[theme];});
+
+    var sub=document.getElementById('phSub');
+    var desc=document.getElementById('phDesc');
+    if(theme==='ceferka'){
+      if(sub){sub.textContent='';sub.style.display='none';}
+      if(desc) desc.textContent="Rachat de fers et métaux à prix compétitifs — Partenaire de confiance des artisans et industries du Bassin d'Arcachon.";
+    } else {
+      if(sub){sub.textContent='RECYCLAGE';sub.style.display='';}
+      if(desc) desc.textContent="Spécialiste de la location de bennes, du traitement des déchets et du rachat de métaux — Bassin d'Arcachon, Gironde.";
+    }
+  }
+
+  var saved=null;try{saved=localStorage.getItem('theme');}catch(e){}
+  apply(saved||'recyclage');
+
+  var cbEl=document.getElementById('themeToggle');
+  if(cbEl) cbEl.addEventListener('change',function(){apply(this.checked?'ceferka':'recyclage');});
+  // logos gèrent le thème via onclick + navigation native
+  var cur=window.location.pathname.split('/').pop()||'index.html';
+  document.querySelectorAll('.nav-link').forEach(function(l){
+    l.classList.toggle('active',l.getAttribute('data-page')===cur);
+  });
+})();
+</script>
+</body>
+</html>
